@@ -1,0 +1,1049 @@
+
+
+<!DOCTYPE Html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cartify | Shop Smart. Live Better.</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ================= HEADER ================= */
+
+        .top-header {
+            width: 100%;
+            background: linear-gradient(135deg, #111827, #312e81, #7c3aed);
+            color: white;
+        }
+
+        .header-main {
+            width: 100%;
+            padding: 18px 4%;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .logo {
+            font-size: 30px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .logo span {
+            color: #facc15;
+        }
+
+        .search-area {
+            flex: 1;
+            display: flex;
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .search-area input {
+            flex: 1;
+            padding: 14px 18px;
+            border: none;
+            outline: none;
+            font-size: 15px;
+            border-radius: 8px 0 0 8px;
+        }
+
+        .search-area button {
+            border: none;
+            padding: 0 25px;
+            background: #facc15;
+            color: #111827;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-btn {
+            padding: 10px 15px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.12);
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+
+        .header-btn:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
+        .cart-btn {
+            background: #facc15;
+            color: #111827;
+            font-weight: bold;
+        }
+
+        .cart-btn:hover {
+            background: #fde047;
+        }
+
+        .logout-form {
+            display: inline;
+        }
+
+        .logout-btn {
+            border: none;
+            cursor: pointer;
+            font: inherit;
+            color: white;
+        }
+
+        /* ================= NAVIGATION ================= */
+
+        .nav-bar {
+            width: 100%;
+            padding: 12px 4%;
+            background: rgba(0,0,0,0.18);
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            overflow-x: auto;
+        }
+
+        .nav-bar a {
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .nav-bar a:hover {
+            color: #facc15;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            width: 100%;
+            min-height: 330px;
+            padding: 55px 6%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            background:
+                linear-gradient(
+                    120deg,
+                    #312e81,
+                    #7c3aed,
+                    #db2777
+                );
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 700px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.18);
+            padding: 8px 15px;
+            border-radius: 30px;
+            margin-bottom: 18px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .hero h1 {
+            font-size: clamp(36px, 5vw, 62px);
+            line-height: 1.05;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 span {
+            color: #facc15;
+        }
+
+        .hero p {
+            font-size: 18px;
+            line-height: 1.6;
+            opacity: 0.92;
+            margin-bottom: 28px;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            padding: 14px 26px;
+            background: #facc15;
+            color: #111827;
+            border-radius: 9px;
+            font-weight: 800;
+            transition: 0.3s;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-3px);
+            background: #fde047;
+        }
+
+        .hero-box {
+            min-width: 260px;
+            height: 220px;
+            border-radius: 25px;
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 100px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+
+        /* ================= MAIN ================= */
+
+        .main-wrapper {
+            width: 100%;
+            padding: 30px 4%;
+        }
+
+        .content-layout {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 28px;
+        }
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+            background: white;
+            border-radius: 14px;
+            padding: 22px;
+            height: fit-content;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+            position: sticky;
+            top: 20px;
+        }
+
+        .sidebar h2 {
+            font-size: 20px;
+            margin-bottom: 18px;
+            color: #312e81;
+        }
+
+        .category-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .category-link {
+            padding: 12px 14px;
+            border-radius: 8px;
+            color: #4b5563;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.25s;
+        }
+
+        .category-link:hover {
+            background: #ede9fe;
+            color: #6d28d9;
+            transform: translateX(4px);
+        }
+
+        .category-link.active {
+            background: linear-gradient(
+                135deg,
+                #4f46e5,
+                #7c3aed
+            );
+            color: white;
+        }
+
+        /* ================= PRODUCTS ================= */
+
+        .products-section {
+            min-width: 0;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+            gap: 15px;
+        }
+
+        .section-header h2 {
+            font-size: 28px;
+            color: #111827;
+        }
+
+        .section-header p {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .product-grid {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        /* ================= PRODUCT CARD ================= */
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.07);
+            transition: 0.3s;
+            border: 1px solid #eef0f5;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        }
+
+        .image-wrapper {
+            width: 100%;
+            height: 220px;
+            padding: 15px;
+            background: #f8fafc;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: 0.3s;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .no-image {
+            color: #9ca3af;
+            font-size: 14px;
+        }
+
+        .category-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: #ede9fe;
+            color: #6d28d9;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .product-info {
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #111827;
+        }
+
+        .product-description {
+            color: #6b7280;
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 12px;
+            min-height: 40px;
+        }
+
+        .price-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: auto;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 22px;
+            font-weight: 800;
+            color: #4f46e5;
+        }
+
+        .stock {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .stock.available {
+            color: #059669;
+        }
+
+        .stock.out {
+            color: #dc2626;
+        }
+
+        .product-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .view-btn,
+        .add-btn {
+            padding: 11px 8px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 700;
+            transition: 0.25s;
+        }
+
+        .view-btn {
+            background: #eef2ff;
+            color: #4338ca;
+        }
+
+        .view-btn:hover {
+            background: #e0e7ff;
+        }
+
+        .add-btn {
+            background: linear-gradient(
+                135deg,
+                #4f46e5,
+                #7c3aed
+            );
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .add-btn:hover {
+            opacity: 0.9;
+        }
+
+        .disabled-btn {
+            background: #e5e7eb;
+            color: #9ca3af;
+            cursor: not-allowed;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+        }
+
+        /* ================= EMPTY ================= */
+
+        .empty-products {
+            background: white;
+            border-radius: 15px;
+            padding: 70px 20px;
+            text-align: center;
+            color: #6b7280;
+        }
+
+        .empty-products h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #374151;
+        }
+
+        /* ================= MESSAGES ================= */
+
+        .messages {
+            width: 100%;
+            padding: 0 4%;
+            margin-top: 18px;
+        }
+
+        .message {
+            padding: 13px 18px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background: #ecfdf5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            width: 100%;
+            margin-top: 50px;
+            background: #111827;
+            color: white;
+            padding: 35px 5%;
+            text-align: center;
+        }
+
+        footer h2 {
+            margin-bottom: 10px;
+        }
+
+        footer p {
+            color: #9ca3af;
+            font-size: 14px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 1200px) {
+            .product-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 950px) {
+            .header-main {
+                flex-wrap: wrap;
+            }
+
+            .search-area {
+                order: 3;
+                width: 100%;
+                max-width: none;
+            }
+
+            .content-layout {
+                grid-template-columns: 200px 1fr;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .hero-box {
+                display: none;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .header-main {
+                padding: 15px 4%;
+            }
+
+            .logo {
+                font-size: 25px;
+            }
+
+            .header-actions {
+                margin-left: auto;
+            }
+
+            .header-btn {
+                padding: 8px 10px;
+                font-size: 12px;
+            }
+
+            .content-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+            }
+
+            .category-list {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero {
+                min-height: 300px;
+                padding: 40px 5%;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 14px;
+            }
+
+            .image-wrapper {
+                height: 180px;
+            }
+
+            .product-info {
+                padding: 13px;
+            }
+
+            .product-name {
+                font-size: 15px;
+            }
+
+            .price {
+                font-size: 18px;
+            }
+
+            .product-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .image-wrapper {
+                height: 230px;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .category-list {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header class="top-header">
+
+    <div class="header-main">
+
+        <a href="{% url 'home' %}" class="logo">
+            Cart<span>ify</span>
+        </a>
+
+        <form method="GET" action="{% url 'home' %}" class="search-area">
+
+            <input
+                type="text"
+                name="search"
+                value="{{ search|default:'' }}"
+                placeholder="Search for products..."
+            >
+
+            <button type="submit">
+                🔍 Search
+            </button>
+
+        </form>
+
+        <div class="header-actions">
+
+            {% if request.user.is_authenticated %}
+
+                <a href="{% url 'my_orders' %}" class="header-btn">
+                    📦 Orders
+                </a>
+
+                <a href="{% url 'cart' %}" class="header-btn cart-btn">
+                    🛒 Cart
+                </a>
+
+                <form method="POST"
+                      action="{% url 'logout' %}"
+                      class="logout-form">
+
+                    {% csrf_token %}
+
+                    <button type="submit"
+                            class="header-btn logout-btn">
+                        Logout
+                    </button>
+
+                </form>
+
+            {% else %}
+
+                <a href="{% url 'login' %}" class="header-btn">
+                    Login
+                </a>
+
+                <a href="{% url 'register' %}" class="header-btn cart-btn">
+                    Register
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <nav class="nav-bar">
+
+        <a href="{% url 'home' %}">
+            🏠 Home
+        </a>
+
+        {% for category in categories %}
+
+            <a href="{% url 'home' %}?category={{ category.id }}">
+                {{ category.name }}
+            </a>
+
+        {% endfor %}
+
+    </nav>
+
+</header>
+
+
+<!-- ================= MESSAGES ================= -->
+
+{% if messages %}
+
+<div class="messages">
+
+    {% for message in messages %}
+
+        <div class="message">
+            {{ message }}
+        </div>
+
+    {% endfor %}
+
+</div>
+
+{% endif %}
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <span class="hero-badge">
+            ✨ Welcome to Cartify
+        </span>
+
+        <h1>
+            Shop Smart.<br>
+            <span>Live Better.</span>
+        </h1>
+
+        <p>
+            Discover quality products at amazing prices.
+            From electronics to fashion, everything you need
+            is available in one place.
+        </p>
+
+        <a href="#products" class="hero-btn">
+            🛍️ Start Shopping
+        </a>
+
+    </div>
+
+    <div class="hero-box">
+        🛍️
+    </div>
+
+</section>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="main-wrapper">
+
+    <div class="content-layout">
+
+        <!-- ================= SIDEBAR ================= -->
+
+        <aside class="sidebar">
+
+            <h2>
+                Categories
+            </h2>
+
+            <div class="category-list">
+
+                <a
+                    href="{% url 'home' %}"
+                    class="category-link {% if not selected_category %}active{% endif %}"
+                >
+                    🛍️ All Products
+                </a>
+
+                {% for category in categories %}
+
+                    <a
+                        href="{% url 'home' %}?category={{ category.id }}"
+                        class="category-link
+                        {% if selected_category|stringformat:'s' == category.id|stringformat:'s' %}
+                            active
+                        {% endif %}"
+                    >
+                        {{ category.name }}
+                    </a>
+
+                {% endfor %}
+
+            </div>
+
+        </aside>
+
+
+        <!-- ================= PRODUCTS ================= -->
+
+        <section class="products-section" id="products">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        {% if search %}
+                            Search Results
+                        {% elif selected_category %}
+                            Products
+                        {% else %}
+                            Featured Products
+                        {% endif %}
+                    </h2>
+
+                    <p>
+                        {% if search %}
+                            Showing products matching "{{ search }}"
+                        {% else %}
+                            Explore our latest products
+                        {% endif %}
+                    </p>
+
+                </div>
+
+                <p>
+                    {{ products|length }} product{{ products|length|pluralize }}
+                </p>
+
+            </div>
+
+
+            {% if products %}
+
+                <div class="product-grid">
+
+                    {% for product in products %}
+
+                        <article class="product-card">
+
+                            <!-- IMAGE -->
+
+                            <div class="image-wrapper">
+
+                                <span class="category-badge">
+                                    {{ product.category.name }}
+                                </span>
+
+                                {% if product.image %}
+
+                                    <img
+                                        src="{{ product.image.url }}"
+                                        alt="{{ product.name }}"
+                                        class="product-image"
+                                    >
+
+                                {% else %}
+
+                                    <div class="no-image">
+                                        🖼️ No Image Available
+                                    </div>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <!-- PRODUCT INFO -->
+
+                            <div class="product-info">
+
+                                <h3 class="product-name">
+                                    {{ product.name }}
+                                </h3>
+
+                                <p class="product-description">
+                                    {{ product.description|truncatechars:75 }}
+                                </p>
+
+
+                                <div class="price-row">
+
+                                    <span class="price">
+                                        ₹{{ product.price }}
+                                    </span>
+
+                                    {% if product.stock > 0 %}
+
+                                        <span class="stock available">
+                                            ✓ {{ product.stock }} left
+                                        </span>
+
+                                    {% else %}
+
+                                        <span class="stock out">
+                                            Out of Stock
+                                        </span>
+
+                                    {% endif %}
+
+                                </div>
+
+
+                                <div class="product-buttons">
+
+                                    <a
+                                        href="{% url 'product_detail' product.id %}"
+                                        class="view-btn"
+                                    >
+                                        View Details
+                                    </a>
+
+
+                                    {% if product.stock > 0 %}
+
+                                        {% if request.user.is_authenticated %}
+
+                                            <form
+                                                method="POST"
+                                                action="{% url 'add_to_cart' product.id %}"
+                                            >
+
+                                                {% csrf_token %}
+
+                                                <button
+                                                    type="submit"
+                                                    class="add-btn"
+                                                    style="width:100%;"
+                                                >
+                                                    🛒 Add to Cart
+                                                </button>
+
+                                            </form>
+
+                                        {% else %}
+
+                                            <a
+                                                href="{% url 'login' %}"
+                                                class="add-btn"
+                                                style="text-align:center;"
+                                            >
+                                                🛒 Add to Cart
+                                            </a>
+
+                                        {% endif %}
+
+                                    {% else %}
+
+                                        <button
+                                            class="disabled-btn"
+                                            disabled
+                                        >
+                                            Out of Stock
+                                        </button>
+
+                                    {% endif %}
+
+                                </div>
+
+                            </div>
+
+                        </article>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="empty-products">
+
+                    <h3>
+                        😕 No Products Found
+                    </h3>
+
+                    <p>
+                        Try searching for another product
+                        or select a different category.
+                    </p>
+
+                    <br>
+
+                    <a
+                        href="{% url 'home' %}"
+                        class="hero-btn"
+                    >
+                        View All Products
+                    </a>
+
+                </div>
+
+            {% endif %}
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <h2>
+        🛍️ Cartify
+    </h2>
+
+    <p>
+        Shop smart. Live better.
+    </p>
+
+    <p style="margin-top:10px;">
+        © 2026 Cartify. All rights reserved.
+    </p>
+
+</footer>
+
+</body>
+</html>

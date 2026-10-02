@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Checkout - Cartify</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #222;
+        }
+
+        header {
+            background-color: #222;
+            color: white;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            color: #28a745;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .page-title {
+            margin-bottom: 25px;
+        }
+
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+        }
+
+        .box {
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+        }
+
+        .box h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            padding: 18px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .item:last-child {
+            border-bottom: none;
+        }
+
+        .item-name {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .item-details {
+            color: #666;
+            margin-top: 6px;
+            font-size: 14px;
+        }
+
+        .item-price {
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            color: #555;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #ddd;
+            margin-top: 10px;
+            padding-top: 18px;
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        .payment-option {
+            background-color: #f8f9fa;
+            border: 2px solid #28a745;
+            border-radius: 8px;
+            padding: 18px;
+        }
+
+        .payment-title {
+            font-size: 17px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .payment-description {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .place-order {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 7px;
+            background-color: #28a745;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .place-order:hover {
+            background-color: #218838;
+        }
+
+        .back-cart {
+            display: block;
+            text-align: center;
+            margin-top: 18px;
+            color: #555;
+            text-decoration: none;
+        }
+
+        .back-cart:hover {
+            color: #007bff;
+        }
+
+        .secure-note {
+            text-align: center;
+            color: #777;
+            font-size: 13px;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 750px) {
+
+            header {
+                padding: 15px 20px;
+            }
+
+            .checkout-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<header>
+
+    <div class="logo">
+        🛒 Cartify
+    </div>
+
+    <nav>
+
+        <a href="{% url 'home' %}">
+            Home
+        </a>
+
+        <a href="{% url 'cart' %}">
+            🛒 Cart
+        </a>
+
+        <a href="{% url 'my_orders' %}">
+            📦 My Orders
+        </a>
+
+    </nav>
+
+</header>
+
+
+<div class="container">
+
+    <h1 class="page-title">
+        Checkout
+    </h1>
+
+
+    <div class="checkout-grid">
+
+
+        <!-- LEFT SIDE -->
+
+        <div>
+
+
+            <div class="box">
+
+                <h2>
+                    🛍️ Order Summary
+                </h2>
+
+
+                {% for item in items %}
+
+                    <div class="item">
+
+                        <div>
+
+                            <div class="item-name">
+                                {{ item.product.name }}
+                            </div>
+
+                            <div class="item-details">
+                                ₹{{ item.product.price }}
+                                ×
+                                {{ item.quantity }}
+                            </div>
+
+                        </div>
+
+                        <div class="item-price">
+                            ₹{% widthratio item.product.price 1 item.quantity %}
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <div class="box">
+
+                <h2>
+                    💳 Payment Method
+                </h2>
+
+                <div class="payment-option">
+
+                    <div class="payment-title">
+                        💵 Cash on Delivery
+                    </div>
+
+                    <div class="payment-description">
+                        Pay when your order is delivered to your address.
+                        No online payment is required.
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- RIGHT SIDE -->
+
+        <div>
+
+            <div class="box">
+
+                <h2>
+                    💰 Price Details
+                </h2>
+
+                <div class="summary-row">
+
+                    <span>
+                        Items
+                    </span>
+
+                    <span>
+                        {{ items|length }}
+                    </span>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Delivery
+                    </span>
+
+                    <span>
+                        FREE
+                    </span>
+
+                </div>
+
+
+                <div class="total-row">
+
+                    <span>
+                        Total
+                    </span>
+
+                    <span>
+                        ₹{{ total }}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="box">
+
+                <form
+                    method="post"
+                    action="{% url 'place_order' %}"
+                >
+
+                    {% csrf_token %}
+
+                    <button
+                        type="submit"
+                        class="place-order"
+                    >
+                        🛍️ Place Order
+                    </button>
+
+                </form>
+
+
+                <a
+                    href="{% url 'cart' %}"
+                    class="back-cart"
+                >
+                    ← Back to Cart
+                </a>
+
+
+                <div class="secure-note">
+                    🔒 Secure Checkout
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

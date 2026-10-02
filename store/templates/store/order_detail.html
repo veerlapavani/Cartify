@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Order Details - Cartify</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f5f5f5;
+            color: #222;
+        }
+
+        header {
+            background-color: #222;
+            color: white;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        nav a:hover {
+            color: #28a745;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .box {
+            background-color: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .order-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+
+        .order-id {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .date {
+            color: #666;
+            margin-top: 8px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 10px 18px;
+            border-radius: 20px;
+            background-color: #fff3cd;
+            color: #856404;
+            font-weight: bold;
+        }
+
+        .status-tracking {
+            margin-top: 25px;
+        }
+
+        .tracking {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-top: 35px;
+            padding: 0 20px;
+        }
+
+        .tracking::before {
+            content: "";
+            position: absolute;
+            top: 18px;
+            left: 10%;
+            right: 10%;
+            height: 4px;
+            background-color: #ddd;
+            z-index: 0;
+        }
+
+        .step {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            width: 20%;
+        }
+
+        .circle {
+            width: 38px;
+            height: 38px;
+            line-height: 38px;
+            margin: 0 auto 10px;
+            border-radius: 50%;
+            background-color: #ddd;
+            color: #666;
+            font-weight: bold;
+        }
+
+        .step.active .circle {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .step.active .step-title {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .step-title {
+            font-size: 14px;
+        }
+
+        .product-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .product-row:last-child {
+            border-bottom: none;
+        }
+
+        .product-name {
+            font-weight: bold;
+        }
+
+        .quantity {
+            color: #666;
+            margin-left: 8px;
+        }
+
+        .price {
+            font-weight: bold;
+        }
+
+        .total {
+            text-align: right;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .payment {
+            line-height: 1.7;
+        }
+
+        .back-btn {
+            display: inline-block;
+            background-color: #222;
+            color: white;
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 5px;
+        }
+
+        .back-btn:hover {
+            background-color: #444;
+        }
+
+        @media (max-width: 700px) {
+
+            .container {
+                padding: 15px;
+            }
+
+            header {
+                padding: 15px 20px;
+            }
+
+            .order-title {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .tracking {
+                flex-direction: column;
+                gap: 20px;
+                padding-left: 0;
+            }
+
+            .tracking::before {
+                display: none;
+            }
+
+            .step {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                text-align: left;
+            }
+
+            .circle {
+                margin: 0;
+                flex-shrink: 0;
+            }
+
+            .product-row {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .total {
+                text-align: left;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>🛒 Cartify</h1>
+
+    <nav>
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="{% url 'cart' %}">
+            🛒 Cart
+        </a>
+
+        <a href="{% url 'my_orders' %}">
+            📦 My Orders
+        </a>
+
+    </nav>
+
+</header>
+
+
+<div class="container">
+
+    <div class="box">
+
+        <div class="order-title">
+
+            <div>
+
+                <div class="order-id">
+                    Order #{{ order.id }}
+                </div>
+
+                <div class="date">
+                    Placed on:
+                    {{ order.created_at|date:"d M Y, h:i A" }}
+                </div>
+
+            </div>
+
+            <div class="status">
+                {{ order.status }}
+            </div>
+
+        </div>
+
+
+        <div class="status-tracking">
+
+            <h2>
+                📦 Order Tracking
+            </h2>
+
+            <div class="tracking">
+
+                <div class="step
+                    {% if order.status == 'Pending' or order.status == 'Confirmed' or order.status == 'Shipped' or order.status == 'Delivered' %}
+                    active
+                    {% endif %}
+                ">
+
+                    <div class="circle">
+                        ✓
+                    </div>
+
+                    <div class="step-title">
+                        Order Placed
+                    </div>
+
+                </div>
+
+
+                <div class="step
+                    {% if order.status == 'Confirmed' or order.status == 'Shipped' or order.status == 'Delivered' %}
+                    active
+                    {% endif %}
+                ">
+
+                    <div class="circle">
+                        ✓
+                    </div>
+
+                    <div class="step-title">
+                        Confirmed
+                    </div>
+
+                </div>
+
+
+                <div class="step
+                    {% if order.status == 'Shipped' or order.status == 'Delivered' %}
+                    active
+                    {% endif %}
+                ">
+
+                    <div class="circle">
+                        ✓
+                    </div>
+
+                    <div class="step-title">
+                        Shipped
+                    </div>
+
+                </div>
+
+
+                <div class="step
+                    {% if order.status == 'Delivered' %}
+                    active
+                    {% endif %}
+                ">
+
+                    <div class="circle">
+                        ✓
+                    </div>
+
+                    <div class="step-title">
+                        Delivered
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="box">
+
+        <h2>
+            🛍️ Ordered Products
+        </h2>
+
+        {% for item in order.items.all %}
+
+            <div class="product-row">
+
+                <div>
+
+                    <span class="product-name">
+                        {{ item.product.name }}
+                    </span>
+
+                    <span class="quantity">
+                        × {{ item.quantity }}
+                    </span>
+
+                </div>
+
+                <div class="price">
+                    ₹{{ item.price }}
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+
+        <div class="total">
+            Total: ₹{{ order.total_amount }}
+        </div>
+
+    </div>
+
+
+    <div class="box">
+
+        <h2>
+            💳 Payment Information
+        </h2>
+
+        <div class="payment">
+
+            <p>
+                <strong>Payment Method:</strong>
+                Cash on Delivery
+            </p>
+
+            <p>
+                <strong>Payment Status:</strong>
+                Pending
+            </p>
+
+            <p>
+                Payment will be collected when your order is delivered.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <a
+        href="{% url 'my_orders' %}"
+        class="back-btn"
+    >
+        ← Back to My Orders
+    </a>
+
+</div>
+
+</body>
+
+</html>
